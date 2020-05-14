@@ -93,10 +93,11 @@ jobs:
             --config="${CONFIG}" \
             --ruledir=./tests/regression/tests/${{ matrix.tests }}
 
+          docker-compose -f ./tests/docker-compose.yml stop "${CONFIG}"
+
       - name: Clean docker-compose
         env:
           CONFIG: modsec2-apache
         run: |
-          docker-compose -f ./tests/docker-compose.yml stop "${CONFIG}"
           docker-compose -f ./tests/docker-compose.yml down
 
