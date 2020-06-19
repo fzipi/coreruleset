@@ -53,6 +53,9 @@ jobs:
           python -V
           mkdir -p logs/"${CONFIG}"
           docker-compose -f ./tests/docker-compose.yml up -d "${CONFIG}"
+          sleep 10
+          docker-compose -f ./tests/docker-compose.yml logs "${CONFIG}"
+          exit 1
           pip install --upgrade setuptools
           pip install -r tests/regression/requirements.txt
           # Use mounted volume path
