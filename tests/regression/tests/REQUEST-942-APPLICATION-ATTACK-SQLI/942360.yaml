@@ -570,7 +570,7 @@
           method: POST
           port: 80
           uri: /
-          data: " delete"
+          data: " Delete (Trashcan)"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -646,7 +646,7 @@
           method: POST
           port: 80
           uri: /
-          data: "a=/select"
+          data: "/select-quote"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -665,7 +665,7 @@
           method: POST
           port: 80
           uri: /
-          data: "a=(select"
+          data: " Update: After..."
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -684,7 +684,7 @@
           method: POST
           port: 80
           uri: /
-          data: " Update: After..."
+          data: "\"desc\""
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -703,31 +703,12 @@
           method: POST
           port: 80
           uri: /
-          data: "\"desc\""
-          version: HTTP/1.0
-        output:
-          no_log_contains: id "942360"
-  -
-    test_title: 942360-42
-    desc: GH issue 1816
-    stages:
-    -
-      stage:
-        input:
-          dest_addr: 127.0.0.1
-          headers:
-            Accept: "*/*"
-            Host: localhost
-            User-Agent: ModSecurity CRS 3 Tests
-          method: POST
-          port: 80
-          uri: /
           data: "a=/load.php"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
   -
-    test_title: 942360-43
+    test_title: 942360-41
     desc: GH issue 1816
     stages:
     -
@@ -746,7 +727,7 @@
         output:
           no_log_contains: id "942360"
   -
-    test_title: 942360-44
+    test_title: 942360-42
     desc: GH issue 1816
     stages:
     -
@@ -765,7 +746,7 @@
         output:
           no_log_contains: id "942360"
   -
-    test_title: 942360-45
+    test_title: 942360-43
     desc: GH issue 1816
     stages:
     -
@@ -784,7 +765,7 @@
         output:
           no_log_contains: id "942360"
   -
-    test_title: 942360-47
+    test_title: 942360-44
     desc: GH issue 1816
     stages:
     -
@@ -798,7 +779,7 @@
           method: POST
           port: 80
           uri: /
-          data: ". As evidence from"
+          data: "blablabla. As evidence from the following blablabla"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
