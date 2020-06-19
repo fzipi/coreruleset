@@ -31,7 +31,7 @@
 \bend\s*?\);
 [\s(]load_file\s*?\(
 [\"'`]\s+regexp\W
-[\d\W]\s+as\b\s*[\"'`\w]+\s*\bfrom
+[\"'`\w]\s+as\b\s*[\"'`\w]+\s*\bfrom
 ^[\W\d]+\s*?create\s+\w+
 ^[\W\d]+\s*?delete\s+\w+
 ^[\W\d]+\s*?desc\s+\w+
