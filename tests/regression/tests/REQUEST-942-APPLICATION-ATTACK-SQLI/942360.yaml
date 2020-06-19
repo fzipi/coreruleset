@@ -570,7 +570,7 @@
           method: POST
           port: 80
           uri: /
-          data: "a=delete"
+          data: " delete"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -627,7 +627,7 @@
           method: POST
           port: 80
           uri: /
-          data: "update"
+          data: " update"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
@@ -684,7 +684,7 @@
           method: POST
           port: 80
           uri: /
-          data: "Update: After..."
+          data: " Update: After..."
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
