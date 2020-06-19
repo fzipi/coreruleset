@@ -708,25 +708,6 @@
         output:
           no_log_contains: id "942360"
   -
-    test_title: 942360-41
-    desc: GH issue 1816
-    stages:
-    -
-      stage:
-        input:
-          dest_addr: 127.0.0.1
-          headers:
-            Accept: "*/*"
-            Host: localhost
-            User-Agent: ModSecurity CRS 3 Tests
-          method: POST
-          port: 80
-          uri: /
-          data: "#Create System"
-          version: HTTP/1.0
-        output:
-          no_log_contains: id "942360"
-  -
     test_title: 942360-42
     desc: GH issue 1816
     stages:
@@ -799,25 +780,6 @@
           port: 80
           uri: /
           data: ".select-gws-banana"
-          version: HTTP/1.0
-        output:
-          no_log_contains: id "942360"
-  -
-    test_title: 942360-46
-    desc: GH issue 1816
-    stages:
-    -
-      stage:
-        input:
-          dest_addr: 127.0.0.1
-          headers:
-            Accept: "*/*"
-            Host: localhost
-            User-Agent: ModSecurity CRS 3 Tests
-          method: POST
-          port: 80
-          uri: /
-          data: "-- Select reason for delay--"
           version: HTTP/1.0
         output:
           no_log_contains: id "942360"
