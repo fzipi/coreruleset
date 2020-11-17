@@ -1,0 +1,24 @@
+---
+  meta:
+    author: Christian S.J. Peron, Federico G. Schwindt
+    description: US-ASCII Malformed Encoding XSS Filter
+    enabled: true
+    name: 941310.yaml
+  tests:
+  -
+    test_title: 941310-1
+    desc: Positive test using single byte
+    stages:
+    -
+      stage:
+        input:
+          dest_addr: 127.0.0.1
+          headers:
+            Host: localhost
+            Content-Type: "text/plain; charset=us-ascii"
+          method: POST
+          port: 80
+          uri: /
+          data: var=\xbcscript\xbealert(\xa2XSS\xa2)\xbc/script\xbe
+        output:
+          log_contains: id "941310"
