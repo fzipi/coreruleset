@@ -1,2 +1,1 @@
-# use ftw==master
-https://github.com/fzipi/ftw/archive/move-py3.zip
+ftw==1.1.7

@@ -6,10 +6,11 @@ version: '3.3'
 services:
   modsec2-apache:
     container_name: modsec2-apache
-    image: owasp/modsecurity-crs:3.3-apache
+    #image: owasp/modsecurity-crs:3.3-apache
+    image: owasp/modsecurity-crs:v3.2-modsec2-apache
     environment:
       SERVERNAME: localhost
-      BACKEND: https://httpbin.org
+      BACKEND: https://www.example.com
       PORT: "80"
       MODSEC_RULE_ENGINE: DetectionOnly
       PARANOIA: 5

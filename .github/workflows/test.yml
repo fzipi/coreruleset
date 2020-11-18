@@ -22,6 +22,7 @@ jobs:
       fail-fast: false
       matrix:
         modsec_version: [modsec2-apache]
+        tests: [REQUEST-941-APPLICATION-ATTACK-XSS]
           #tests: [REQUEST-911-METHOD-ENFORCEMENT,
           #      REQUEST-913-SCANNER-DETECTION,
           #      REQUEST-920-PROTOCOL-ENFORCEMENT,
@@ -41,10 +42,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Set up Python 3
-        uses: actions/setup-python@v1
+      - name: Set up Python 2
+        uses: actions/setup-python@v2
         with:
-          python-version: 3.6
+          python-version: '2.x'
 
       - name: "Run tests for ${{ matrix.modsec_version }}`"
         env:
@@ -52,12 +53,12 @@ jobs:
         run: |
           mkdir -p logs/"${CONFIG}/apache2"
           docker-compose -f ./tests/docker-compose.yml up -d
-          pip3 install --upgrade setuptools wheel
-          pip3 install -r tests/regression/requirements.txt
+          python -m pip install --upgrade setuptools wheel
+          python -m pip install -r tests/regression/requirements.txt
           # Use mounted volume path
           py.test -vs tests/regression/CRS_Tests.py \
             --config="${CONFIG}" \
-            --ruledir=./ftw3.yml || cat ./logs/modsec2-apache/apache2/error.log
+            --ruledir=./tests/regression/tests/${{ matrix.tests }} || cat ./logs/modsec2-apache/apache2/error.log
           # Change permissions audit file
           sudo chmod 644 ./logs/modsec2-apache/modsec_audit.log
 
