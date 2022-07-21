@@ -481,7 +481,7 @@ SecDefaultAction "phase:2,log,auditlog,pass"
 # Forbidden request headers.
 # Header names should be lowercase, enclosed by /slashes/ as delimiters.
 # Blocking Proxy header prevents 'httpoxy' vulnerability: https://httpoxy.org
-# Default: /proxy/ /lock-token/ /content-range/ /if/ /user-agentt/
+# Default: /proxy/ /lock-token/ /content-range/ /if/ /user-agent/
 # Uncomment this rule to change the default.
 #SecAction \
 # "id:900250,\
@@ -489,7 +489,7 @@ SecDefaultAction "phase:2,log,auditlog,pass"
 #  nolog,\
 #  pass,\
 #  t:none,\
-#  setvar:'tx.restricted_headers=/proxy/ /lock-token/ /content-range/ /if/ /user-agentt/'"
+#  setvar:'tx.restricted_headers=/proxy/ /lock-token/ /content-range/ /if/ /user-agent/'"
 
 # Content-Types charsets that a client is allowed to send in a request.
 # The content-types are enclosed by |pipes| as delimiters to guarantee exact matches.
