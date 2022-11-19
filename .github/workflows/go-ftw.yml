@@ -21,11 +21,15 @@ jobs:
         modsec_version: [modsec2-apache]
     steps:
       - name: "Checkout repo"
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: "Install dependencies"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -skLo - https://github.com/coreruleset/go-ftw/releases/download/v0.4.0/ftw_Linux_x86_64.tar.gz | tar -xzf - ftw
+          gh release download -R coreruleset/go-ftw -p 'ftw_Linux_x86_64.tar.gz' v0.4.2
+          tar xzf ftw*Linux_x864_64.tar.gz
+          rm ftw*Linux_x864_64.tar.gz
 
       - name: "Run tests for ${{ matrix.modsec_version }}"
         run: |
@@ -34,12 +38,9 @@ jobs:
           docker-compose -f ./tests/docker-compose.yml logs
           [ $(docker inspect ${{ matrix.modsec_version }} --format='{{.State.Running}}') = 'true' ]
           ./ftw check -d tests/regression/tests
-          ./ftw run -d tests/regression/tests
+          ./ftw run -d tests/regression/tests --show-failures-only
         env:
           FTW_LOGFILE: './tests/logs/modsec2-apache/error.log'
-          FTW_LOGTYPE_NAME: 'apache'
-          FTW_LOGTYPE_TIMEREGEX: '\[([A-Z][a-z]{2} [A-z][a-z]{2} \d{1,2} \d{1,2}\:\d{1,2}\:\d{1,2}\.\d+? \d{4})\]'
-          FTW_LOGTYPE_TIMEFORMAT: 'ddd MMM DD HH:mm:ss.S YYYY'
 
       - name: "Change permissions if failed"
         if: failure()
@@ -47,7 +48,7 @@ jobs:
             # we want to get the audit log, so change permissions (file is only for root on docker)
             sudo chmod 644 tests/logs/${{ matrix.modsec_version }}/modsec_audit.log
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: waf-logs
